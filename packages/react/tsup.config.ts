@@ -13,4 +13,10 @@ export default defineConfig({
   banner: {
     js: '"use client";',
   },
+  esbuildOptions(options) {
+    options.loader = {
+      ...options.loader,
+      '.module.css': 'local-css',
+    };
+  },
 });

@@ -1,4 +1,4 @@
-﻿import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import style from "./Modal.module.css";
 
@@ -62,7 +62,7 @@ export function Modal({
                         type="button"
                         className={`${style.closeButton} ${closeButtonClassName ?? ""}`}
                         onClick={onClose}
-                        aria-label="Zavřít"
+                        aria-label="Close"
                     />
                 )}
                 {children}

@@ -1,73 +1,74 @@
 # Netuvio Tools
 
-Monorepo pomocných komponent a nástrojů ekosystému **Netuvio** pro React a Vue 3.
+Monorepo of utility components and tools for the **Netuvio** ecosystem supporting React and Vue 3.
 
-## Struktura monorepa
+## Monorepo Structure
 
 ```text
 netuvio-tools/
 └── packages/
-    ├── react/   # @netuvio/tools-react (React utility komponenty) -> publikováno na NPM
-    └── vue/     # @netuvio/tools-vue   (Vue 3 utility komponenty)  -> publikováno na NPM
+    ├── react/   # @netuvio/tools-react (React utility components) -> published to NPM
+    └── vue/     # @netuvio/tools-vue   (Vue 3 utility components)  -> published to NPM
 ```
 
-## Příkazy
+## Commands
 
 ```bash
-# Instalace všech závislostí
+# Install all dependencies
 pnpm install
 
-# Sestavení všech balíčků
+# Build all packages
 pnpm run build
 
-# Typová kontrola TypeScriptu
+# TypeScript typecheck
 pnpm run typecheck
 
-# Vyčištění dist složek
+# Clean dist directories
 pnpm run clean
 ```
 
-## Jak publikovat na NPM
+## How to Publish to NPM
 
-Pro publikování balíčků `@netuvio/tools-react` a `@netuvio/tools-vue` můžete využít dvě metody:
+To publish `@netuvio/tools-react` and `@netuvio/tools-vue`, you can use either of the following methods:
 
-### 1. Lokální publikace z terminálu (CLI)
+### 1. Local Publishing from Terminal (CLI)
 
-1. **Přihlášení do NPM**:
-   Musíte mít účet s přístupem do organizace `@netuvio`:
+1. **Log in to NPM**:
+   Make sure you are logged in to an account with access to the `@netuvio` organization:
    ```bash
    npm login
    ```
-2. **Sestavení balíčků**:
+2. **Build packages**:
    ```bash
    pnpm run build
    ```
-3. **Publikování na NPM**:
+3. **Publish to NPM**:
    ```bash
    pnpm run publish:packages
    ```
-   *(Pokud máte v gitu necommitnuté změny, přidejte příznak `--no-git-checks`: `pnpm --filter "@netuvio/tools-*" publish --access public --no-git-checks`)*
+   *(If you have uncommitted changes in git, add the `--no-git-checks` flag: `pnpm --filter "@netuvio/tools-*" publish --access public --no-git-checks`)*
 
 ---
 
-### 2. Automatická publikace přes GitHub Actions (CI/CD)
+### 2. Automated Publishing via GitHub Actions (CI/CD)
 
-V repozitáři je nastaven workflow [`.github/workflows/publish.yml`](./.github/workflows/publish.yml).
+The repository includes a ready-to-use workflow in [`.github/workflows/publish.yml`](./.github/workflows/publish.yml).
 
-1. **Nastavení NPM Tokenu v GitHubu**:
-   - Na [npmjs.com](https://www.npmjs.com/) vygenerujte Access Token (typ **Automation** nebo **Granular Access Token** s právy publikovat v `@netuvio`).
-   - V repozitáři na GitHubu přejděte do **Settings** → **Secrets and variables** → **Actions** → **New repository secret**.
-   - Vytvořte secret s názvem `NPM_TOKEN` a vložte vygenerovaný token.
-2. **Spuštění publikace**:
-   - **Ručně (Workflow Dispatch)**: V záložce **Actions** vyberte *Publish to NPM* a klikněte na **Run workflow**.
-   - **Přes GitHub Release**: Vytvořením nového GitHub Release (např. tag `v0.1.0`) se automaticky spustí typecheck, build a publikace na NPM s ověřením NPM Provenance.
+1. **Configure NPM Token in GitHub**:
+   - Go to [npmjs.com](https://www.npmjs.com/) and generate an Access Token (type **Automation** or a **Granular Access Token** with publish permissions for `@netuvio`).
+   - In your GitHub repository, navigate to **Settings** → **Secrets and variables** → **Actions** → **New repository secret**.
+   - Create a secret named `NPM_TOKEN` and paste your generated token.
+2. **Trigger the Publish**:
+   - **Manually (Workflow Dispatch)**: Go to the **Actions** tab on GitHub, select *Publish to NPM*, and click **Run workflow**.
+   - **Via GitHub Release**: Creating a new GitHub Release (e.g., tag `v0.1.0`) will automatically run typechecking, building, and publishing to NPM with NPM Provenance verification.
 
 ---
 
-### Pravidla pro verzování
-- Verze se spravuje v `packages/react/package.json` a `packages/vue/package.json`.
-- NPM nedovolí přepsat již publikovanou verzi – před každým dalším vydáním je nutné číslo verze navýšit (např. `0.1.1`, `0.2.0`).
+### Versioning Guidelines
+- Package versions are managed in `packages/react/package.json` and `packages/vue/package.json`.
+- NPM does not allow overwriting already published versions — increment the version number before each release (e.g., `0.1.1`, `0.2.0`).
 
-## Licence
+## License
 
 MIT © [Netuvio (Stanislav Škudrna)](./LICENSE)
+
