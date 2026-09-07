@@ -1,0 +1,19 @@
+{
+  "name": "netuvio-tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Netuvio Tools Monorepo",
+  "author": "Netuvio (Stanislav Škudrna)",
+  "license": "MIT",
+  "packageManager": "pnpm@10.5.2",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "typecheck": "pnpm -r run typecheck",
+    "clean": "pnpm -r --parallel exec -- rimraf dist",
+    "publish:packages": "pnpm --filter \"@netuvio/tools-*\" publish --access public"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.2"
+  }
+}

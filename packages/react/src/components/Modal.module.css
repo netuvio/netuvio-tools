@@ -1,0 +1,103 @@
+﻿.layer {
+    position: fixed;
+    inset: 0;
+    z-index: var(--netuvio-modal-z-index, var(--modal-z-index, 1000));
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow: auto;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--netuvio-modal-backdrop, rgba(0, 0, 0, 0.34));
+    backdrop-filter: blur(0) brightness(1);
+    -webkit-backdrop-filter: blur(0) brightness(1);
+    transition: opacity 0.22s ease, backdrop-filter 0.22s ease, -webkit-backdrop-filter 0.22s ease, visibility 0s 0.22s;
+}
+
+.layer.open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    backdrop-filter: blur(7px) brightness(0.48);
+    -webkit-backdrop-filter: blur(7px) brightness(0.48);
+    transition: opacity 0.22s ease, backdrop-filter 0.22s ease, -webkit-backdrop-filter 0.22s ease, visibility 0s;
+}
+
+.layer.open .content {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.content {
+    position: relative;
+    width: min(400px, 92vw);
+    max-height: calc(100vh - 48px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid var(--netuvio-border, var(--border-color, rgba(0, 0, 0, 0.1)));
+    border-radius: 24px;
+    background: var(--netuvio-bg, var(--element-background, #ffffff));
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+    transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.closeButton {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 3;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background: var(--netuvio-bg-darker, var(--element-background-darker, rgba(0, 0, 0, 0.06)));
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.closeButton:hover {
+    background: var(--netuvio-accent, var(--input-background-active, rgba(0, 0, 0, 0.12)));
+    transform: scale(1.06);
+}
+
+.closeButton::before,
+.closeButton::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 13px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--netuvio-text, var(--text-color, #111111));
+}
+
+.closeButton::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closeButton::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@media screen and (max-width: 600px) {
+    .layer {
+        padding: 12px;
+    }
+
+    .content {
+        max-height: calc(100vh - 24px);
+        border-radius: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .layer,
+    .content {
+        transition-duration: 0.01ms;
+    }
+}
